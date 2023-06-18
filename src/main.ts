@@ -49,6 +49,7 @@ function createObject() {
     size: new Vector(16, 16),
     alignment: undefined,
     types: ["rect"],
+    color: "blue",
   };
   newObject.shapes = [shape];
   Physics.addEntities([newObject]);

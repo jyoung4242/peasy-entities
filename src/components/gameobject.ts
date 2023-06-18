@@ -25,6 +25,7 @@ export class GameObject {
     this.position = config.startingPosition;
     this.size = config.size;
     this.orientation = config.orientation;
+    if (config.color) this.color = config.color;
   }
 
   static create(config: GOconfig) {
