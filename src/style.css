@@ -1,0 +1,93 @@
+/*style.css*/
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  background-color: var(--current-background);
+  color: var(--current-foreground);
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+.color1 {
+  color: #131617;
+}
+.color2 {
+  color: #34393c;
+}
+.color3 {
+  color: #5e676b;
+}
+.color4 {
+  color: #929fa4;
+}
+.color5 {
+  color: #d0e3e9;
+}
+:root {
+  --pixel-size: 2.5;
+  /* Dark theme */
+  --dark-background: #34393c;
+  --dark-dark-accent: #131617;
+  --dark-neutral: #5e676b;
+  --dark-light-accent: #929fa4;
+  --dark-foregeound: #d0e3e9;
+  /* Light theme */
+  --light-background: #d0e3e9;
+  --light-dark-accent: #131617;
+  --light-foregeound: #34393c;
+  --light-neutral: #5e676b;
+  --light-light-accent: #929fa4;
+  /* Defaults */
+  --current-background: var(--light-background);
+  --current-dark-accent: var(--light-dark-accent);
+  --current-light-accent: var(--light-light-accent);
+  --current-foreground: var(--light-foregeound);
+  --current-neutral: var(--light-neutral);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --current-background: var(--dark-background);
+    --current-foreground: var(--dark-foregeound);
+    --current-dark-accent: var(--dark-dark-accent);
+    --current-light-accent: var(--dark-light-accent);
+    --current-neutral: var(--dark-neutral);
+  }
+}
+
+viewport-layer {
+  position: relative;
+  width: 400px;
+  aspect-ratio: 3/2;
+  border: 3px solid white;
+  border-radius: 5px;
+  background-color: black;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  scale: var(--pixel-size);
+  display: block;
+}
+
+canvas {
+  width: 400px;
+  aspect-ratio: 3/2;
+  position: absolute;
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --pixel-size: 1.5;
+  }
+}
+
+@media (max-width: 675px) {
+  :root {
+    --pixel-size: 0.75;
+  }
+}
