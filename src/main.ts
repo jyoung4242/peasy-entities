@@ -4,11 +4,11 @@ import { Assets } from "@peasy-lib/peasy-assets";
 import { Input } from "@peasy-lib/peasy-input";
 import { Physics, Vector } from "@peasy-lib/peasy-physics";
 import { Lighting } from "@peasy-lib/peasy-lighting";
-import { GameObject } from "./components/gameobject";
+import { GOconfig, GameObject } from "./components/gameobject";
 import { Engine } from "@peasy-lib/peasy-engine";
 
 const model = {
-  objects: [],
+  objects: <GameObject>[],
   canvas: <any>undefined,
 };
 const template = `
@@ -35,7 +35,13 @@ Physics.initialize({
 
 Engine.create({ fps: 240, callback: updatePeasy });
 
-function createObject(config: any) {}
+function createObject() {
+  let newObject: GameObject;
+  const myConfig: GOconfig = {};
+
+  newObject = GameObject.create(myConfig);
+  model.objects.push(newObject);
+}
 
 function updatePeasy(deltaTime: number, now: number) {
   Physics.update(deltaTime, now);
