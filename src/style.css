@@ -91,3 +91,10 @@ canvas {
     --pixel-size: 0.75;
   }
 }
+
+.object {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+}
