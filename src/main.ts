@@ -52,12 +52,17 @@ function createObject() {
     color: "blue",
   };
   newObject.shapes = [shape];
-  Physics.addEntities([newObject]);
+  newObject.physics = Physics.addEntities([newObject])[0];
   model.objects.push(newObject);
+  console.log(model.objects);
+
+  return;
 }
 
 function updatePeasy(deltaTime: number, now: number) {
-  Physics.update(deltaTime, now);
+  const diagobject = Physics.update(deltaTime, now);
+  if (diagobject.movers != 0) console.log(diagobject);
+
   UI.update();
 }
 
@@ -73,27 +78,27 @@ Input.map(
       //pressed
       switch (action) {
         case "walk-left":
-          Physics.entities[0].addForce({
+          model.objects[0].physics.addForce({
             name: action,
-            magnitude: 5,
+            magnitude: 1,
             maxMagnitude: 10,
             direction: new Vector(-1, 0),
             duration: 0,
           });
           break;
         case "walk-up":
-          Physics.entities[0].addForce({
+          model.objects[0].physics.addForce({
             name: action,
-            magnitude: 5,
+            magnitude: 1,
             maxMagnitude: 10,
             direction: new Vector(0, -1),
             duration: 0,
           });
           break;
         case "walk-right":
-          Physics.entities[0].addForce({
+          model.objects[0].physics.addForce({
             name: action,
-            magnitude: 5,
+            magnitude: 1,
             maxMagnitude: 10,
             direction: new Vector(1, 0),
             duration: 0,
@@ -101,9 +106,9 @@ Input.map(
 
           break;
         case "walk-down":
-          Physics.entities[0].addForce({
+          model.objects[0].physics.addForce({
             name: action,
-            magnitude: 5,
+            magnitude: 1,
             maxMagnitude: 10,
             direction: new Vector(0, 1),
             duration: 0,
@@ -111,10 +116,12 @@ Input.map(
 
           break;
       }
-      console.log(Physics.entities[0]);
+      console.log(model.objects[0]);
     } else {
       //released
       Physics.removeForce(action);
+      console.log("releasing: ", action);
+      console.log(model.objects[0]);
     }
   }
 );

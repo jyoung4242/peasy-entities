@@ -20,6 +20,9 @@ export class GameObject {
   public maxSpeed?: number;
   public colliding?: (entity: Entity, intersection: Intersection) => CollidingResolution;
   public orientation: number;
+  public physics: any;
+  public audio: any;
+  public lighting: any;
 
   constructor(config: GOconfig) {
     this.position = config.startingPosition;
