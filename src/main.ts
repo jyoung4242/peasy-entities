@@ -28,7 +28,7 @@ Physics.initialize({
   ctx: model.canvas.getContext("2d"),
   showAreas: true,
 });
-const myEngine = Engine.create({ fps: 240, callback: updatePeasy });
+const myEngine = Engine.create({ callback: updatePeasy });
 
 function createObject() {
   let newObject: GameObject;
@@ -75,7 +75,8 @@ Input.map(
         case "walk-left":
           Physics.entities[0].addForce({
             name: action,
-            magnitude: 1,
+            magnitude: 5,
+            maxMagnitude: 10,
             direction: new Vector(-1, 0),
             duration: 0,
           });
@@ -83,7 +84,8 @@ Input.map(
         case "walk-up":
           Physics.entities[0].addForce({
             name: action,
-            magnitude: 1,
+            magnitude: 5,
+            maxMagnitude: 10,
             direction: new Vector(0, -1),
             duration: 0,
           });
@@ -91,7 +93,8 @@ Input.map(
         case "walk-right":
           Physics.entities[0].addForce({
             name: action,
-            magnitude: 1,
+            magnitude: 5,
+            maxMagnitude: 10,
             direction: new Vector(1, 0),
             duration: 0,
           });
@@ -100,7 +103,8 @@ Input.map(
         case "walk-down":
           Physics.entities[0].addForce({
             name: action,
-            magnitude: 1,
+            magnitude: 5,
+            maxMagnitude: 10,
             direction: new Vector(0, 1),
             duration: 0,
           });
@@ -110,7 +114,7 @@ Input.map(
       console.log(Physics.entities[0]);
     } else {
       //released
-      Physics.removeForce(action, Physics.entities[0]);
+      Physics.removeForce(action);
     }
   }
 );
