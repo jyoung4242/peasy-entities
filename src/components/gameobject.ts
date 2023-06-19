@@ -26,6 +26,7 @@ export class GameObject {
     this.size = config.size;
     this.orientation = config.orientation;
     if (config.color) this.color = config.color;
+    if (config.maxSpeed) this.maxSpeed = config.maxSpeed;
   }
 
   static create(config: GOconfig) {

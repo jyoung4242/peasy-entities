@@ -28,9 +28,6 @@ Physics.initialize({
   ctx: model.canvas.getContext("2d"),
   showAreas: true,
 });
-
-console.log(Physics);
-
 const myEngine = Engine.create({ fps: 240, callback: updatePeasy });
 
 function createObject() {
@@ -40,9 +37,12 @@ function createObject() {
     size: new Vector(16, 16),
     color: "blue",
     orientation: 0,
+    maxSpeed: 100,
   };
 
   newObject = GameObject.create(myConfig);
+  console.log(newObject);
+
   const shape = {
     position: { x: 0, y: 0 },
     radius: undefined,
@@ -58,7 +58,62 @@ function createObject() {
 
 function updatePeasy(deltaTime: number, now: number) {
   Physics.update(deltaTime, now);
+  UI.update();
 }
+
+Input.map(
+  {
+    ArrowLeft: { action: "walk-left", repeat: false },
+    ArrowRight: { action: "walk-right", repeat: false },
+    ArrowUp: { action: "walk-up", repeat: false },
+    ArrowDown: { action: "walk-down", repeat: false },
+  },
+  (action: string, doing: boolean) => {
+    if (doing) {
+      //pressed
+      switch (action) {
+        case "walk-left":
+          Physics.entities[0].addForce({
+            name: action,
+            magnitude: 1,
+            direction: new Vector(-1, 0),
+            duration: 0,
+          });
+          break;
+        case "walk-up":
+          Physics.entities[0].addForce({
+            name: action,
+            magnitude: 1,
+            direction: new Vector(0, -1),
+            duration: 0,
+          });
+          break;
+        case "walk-right":
+          Physics.entities[0].addForce({
+            name: action,
+            magnitude: 1,
+            direction: new Vector(1, 0),
+            duration: 0,
+          });
+
+          break;
+        case "walk-down":
+          Physics.entities[0].addForce({
+            name: action,
+            magnitude: 1,
+            direction: new Vector(0, 1),
+            duration: 0,
+          });
+
+          break;
+      }
+      console.log(Physics.entities[0]);
+    } else {
+      //released
+      Physics.removeForce(action, Physics.entities[0]);
+    }
+  }
+);
 
 createObject();
 myEngine.start();
