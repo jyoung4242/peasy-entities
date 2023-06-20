@@ -22,7 +22,8 @@ export class Wall extends GameObject {
       color: "red",
     };
     wall.shapes = [shape];
-    wall.mass = Infinity;
+    wall.mass = 1000;
+    wall.restitution = 0;
 
     wall.physics = Physics.addEntities([wall])[0];
     return wall;
